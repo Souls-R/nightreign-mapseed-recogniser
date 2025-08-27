@@ -93,6 +93,15 @@ const MAPS = [
   'Default', 'Mountaintop', 'Crater', 'Rotted Woods', 'Noklateo'
 ];
 
+// Chinese map name mapping
+const MAP_NAMES_CN = {
+  'Default': '默认',
+  'Mountaintop': '山巅',
+  'Crater': '陨坑',
+  'Rotted Woods': '腐朽森林',
+  'Noklateo': '诺克拉特奥'
+};
+
 // Seed data matrix with REAL POI data (manually analyzed from pattern images)
 // This replaces the mock data with actual POI locations from the images
 let seedDataMatrix = [

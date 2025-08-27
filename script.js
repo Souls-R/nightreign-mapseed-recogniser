@@ -10,12 +10,12 @@ async function loadClassificationResults() {
         if (data.classifications) {
             CV_CLASSIFICATION_DATA = data.classifications;
             const seedCount = Object.keys(CV_CLASSIFICATION_DATA).length;
-            console.log('✅ Loaded classification results:', seedCount, 'seeds');
+            console.log('✅ 已加载分类结果:', seedCount, '个种子');
             return true;
         }
         return false;
     } catch (error) {
-        console.warn('⚠️ Dataset not found (this is normal if not yet created):', error.message);
+        console.warn('⚠️ 未找到数据集 (如果尚未创建则正常):', error.message);
         return false;
     }
 }
@@ -162,9 +162,9 @@ class NightreignMapRecogniser {
             if (statusElement) {
                 if (hasClassifications) {
                     const classCount = Object.keys(CV_CLASSIFICATION_DATA).length;
-                    statusElement.innerHTML = `<span style="color: #28a745;">✅ Loaded ${seedCount} seeds (${classCount} classified)</span>`;
+                    statusElement.innerHTML = `<span style="color: #28a745;">✅ 已加载 ${seedCount} 个种子 (${classCount} 个已分类)</span>`;
                 } else {
-                    statusElement.innerHTML = `<span style="color: #28a745;">✅ Loaded ${seedCount} seeds</span>`;
+                    statusElement.innerHTML = `<span style="color: #28a745;">✅ 已加载 ${seedCount} 个种子</span>`;
                 }
             }
             
@@ -249,16 +249,16 @@ class NightreignMapRecogniser {
         this.ctx.font = 'bold 28px Inter, sans-serif';
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
-        const mapTitle = this.chosenMap ? `${this.chosenMap} Map Area` : 'Default Map Area';
+        const mapTitle = this.chosenMap ? `${MAP_NAMES_CN[this.chosenMap] || this.chosenMap} 地图区域` : '默认地图区域';
         this.ctx.fillText(mapTitle, CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 60);
         
         this.ctx.fillStyle = '#4fc3f7';
         this.ctx.font = 'bold 18px Inter, sans-serif';
-        this.ctx.fillText('Click orange dots to mark POI locations', CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 20);
+        this.ctx.fillText('点击橙色圆点来标记兴趣点位置', CANVAS_SIZE / 2, CANVAS_SIZE / 2 - 20);
         
         this.ctx.fillStyle = '#ffffff';
         this.ctx.font = '14px Inter, sans-serif';
-        this.ctx.fillText('Select Nightlord and Map above for accurate seed detection', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 20);
+        this.ctx.fillText('请在上方选择夜王和地图以获得准确的种子检测', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 20);
 
         // Draw POIs for Default map
         this.currentPOIs.forEach(poi => {
@@ -335,7 +335,7 @@ class NightreignMapRecogniser {
         console.log(`Selected map: ${map}, POIs: ${this.currentPOIs.length}`);
         
         // Update UI
-        document.getElementById('chosen-map').textContent = map;
+        document.getElementById('chosen-map').textContent = MAP_NAMES_CN[map] || map;
         
         // Update button states
         document.querySelectorAll('.map-btn').forEach(btn => {
@@ -504,9 +504,9 @@ class NightreignMapRecogniser {
                 this.ctx.font = 'bold 20px Inter, sans-serif';
                 this.ctx.textAlign = 'center';
                 this.ctx.textBaseline = 'middle';
-                this.ctx.fillText(`${this.chosenMap} Map`, CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+                this.ctx.fillText(`${MAP_NAMES_CN[this.chosenMap] || this.chosenMap} 地图`, CANVAS_SIZE / 2, CANVAS_SIZE / 2);
                 this.ctx.font = '14px Inter, sans-serif';
-                this.ctx.fillText('Click on orange dots to mark POIs', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 30);
+                this.ctx.fillText('点击橙色圆点来标记兴趣点', CANVAS_SIZE / 2, CANVAS_SIZE / 2 + 30);
             }
         }
 
@@ -577,7 +577,7 @@ class NightreignMapRecogniser {
         // Left click - place church
         this.canvas.addEventListener('click', (e) => {
             if (!this.chosenNightlord || !this.chosenMap) {
-                console.log('Please select both Nightlord and Map before marking POIs');
+                console.log('请在标记兴趣点之前同时选择夜王和地图');
                 return;
             }
             const pos = this.getMousePos(e);
@@ -593,7 +593,7 @@ class NightreignMapRecogniser {
         this.canvas.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             if (!this.chosenNightlord || !this.chosenMap) {
-                console.log('Please select both Nightlord and Map before marking POIs');
+                console.log('请在标记兴趣点之前同时选择夜王和地图');
                 return;
             }
             const pos = this.getMousePos(e);
@@ -609,7 +609,7 @@ class NightreignMapRecogniser {
             if (e.button === 1) {
                 e.preventDefault();
                 if (!this.chosenNightlord || !this.chosenMap) {
-                    console.log('Please select both Nightlord and Map before marking POIs');
+                    console.log('请在标记兴趣点之前同时选择夜王和地图');
                     return;
                 }
                 const pos = this.getMousePos(e);
@@ -800,7 +800,7 @@ class NightreignMapRecogniser {
 
     showNoSeedsFound() {
         const seedCountElement = document.getElementById('seed-count');
-        seedCountElement.innerHTML = '<span style="color: #e74c3c; font-weight: 600;">NO SEED FOUND<br>RESET THE MAP!</span>';
+        seedCountElement.innerHTML = '<span style="color: #e74c3c; font-weight: 600;">未找到种子<br>请重置地图！</span>';
     }
 
     showSingleSeed(seedRow) {
@@ -824,12 +824,12 @@ class NightreignMapRecogniser {
         seedImageContainer.innerHTML = `
             <center>
                 <a href="${seedImageUrl}" target="_blank">
-                    <img src="${seedImageUrl}" alt="Seed ${mapSeed}" style="max-width: 768px; border: 2px solid black;">
+                    <img src="${seedImageUrl}" alt="种子 ${mapSeed}" style="max-width: 768px; border: 2px solid black;">
                 </a>
                 <br>
-                <b style="color: black;">Mapseed: ${mapSeed}</b>
+                <b style="color: black;">地图种子: ${mapSeed}</b>
                 <br>
-                <small style="color: blue;">Click on the map to open it in a new tab.</small>
+                <small style="color: blue;">点击地图在新标签页中打开。</small>
             </center>
         `;
     }

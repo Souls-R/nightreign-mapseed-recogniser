@@ -1,23 +1,22 @@
 
-You can access the site [[https://thanosapollo.github.io/nightreign-mapseed-recogniser/][here]]
+你可以在[[https://thanosapollo.github.io/nightreign-mapseed-recogniser/][这里]]访问网站
 
-* About
+* 关于
 
-Map seed recognizer for [[https://en.bandainamcoent.eu/elden-ring/elden-ring-nightreign][Elden Ring Nightreign]].
+[[https://en.bandainamcoent.eu/elden-ring/elden-ring-nightreign][艾尔登法环：黑夜君临]]的地图种子识别器。
 
-How to use:
+使用方法：
 
-+ Select Nightlord & Map/Shifting Earth
-+ Select the POIs of the map, which include Village, Church of Vows &
-  Sorcerer's Rise.
-+ Based on the above input, you will find your map seed information.
++ 选择夜王和地图/变换大地
++ 选择地图的兴趣点，包括村庄、誓约教堂和魔法师塔。
++ 基于以上输入，你将找到你的地图种子信息。
 
      #+BEGIN_HTML
    <p align="center">
-     <img src="/assets/images/screenshot-02.png" alt="Screenshot" width="600"/>
+     <img src="/assets/images/screenshot-02.png" alt="截图" width="600"/>
    </p>
    #+END_HTML
 
-* Credits
+* 致谢
 
-This project is based on the work of [[https://github.com/thefifthmatt][thefifthmatt]].
+此项目基于[[https://github.com/thefifthmatt][thefifthmatt]]的工作。
